@@ -1,9 +1,51 @@
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { Sparkles, Shield, Award, Heart } from 'lucide-react';
 
 export default function HomePage() {
+  const [currentImageSet, setCurrentImageSet] = useState(0);
+
+  // Define image sets for rotation
+  const imageSets = [
+    {
+      topLeft: "https://static.wixstatic.com/media/73b405_3bd31be1cec44a278f00dd44e17bed40~mv2.jpg",
+      topRight: "https://static.wixstatic.com/media/73b405_39e9a6762acd4c57a0e1586d6b778da6~mv2.jpg",
+      bottomLeft: "https://static.wixstatic.com/media/73b405_b149cae6b8ed45c59fa0c1d4340c98da~mv2.jpg",
+      bottomRight: "https://static.wixstatic.com/media/73b405_e4849ef22cec425da9bfab75e4496287~mv2.jpg",
+      alts: {
+        topLeft: "Traditional gold jewelry set with earrings",
+        topRight: "Traditional Indian gold jewelry with intricate designs",
+        bottomLeft: "Exquisite gold necklace with traditional motifs",
+        bottomRight: "Elegant gold necklace with matching earrings"
+      }
+    },
+    {
+      topLeft: "https://static.wixstatic.com/media/73b405_95a47a76a4ea4c75a3f59b6398b61a2f~mv2.jpg",
+      topRight: "https://static.wixstatic.com/media/73b405_91b5d5ce389747bba4f76b390ebbd4a3~mv2.jpg",
+      bottomLeft: "https://static.wixstatic.com/media/73b405_3bd31be1cec44a278f00dd44e17bed40~mv2.jpg",
+      bottomRight: "https://static.wixstatic.com/media/73b405_39e9a6762acd4c57a0e1586d6b778da6~mv2.jpg",
+      alts: {
+        topLeft: "Ornate gold necklace with detailed craftsmanship",
+        topRight: "Luxury diamond and emerald necklace",
+        bottomLeft: "Traditional gold jewelry set with earrings",
+        bottomRight: "Traditional Indian gold jewelry with intricate designs"
+      }
+    }
+  ];
+
+  // Timer for image rotation
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageSet((prev) => (prev + 1) % imageSets.length);
+    }, 5000); // 5 seconds
+
+    return () => clearInterval(timer);
+  }, [imageSets.length]);
+
+  const currentImages = imageSets[currentImageSet];
   return (
     <div className="min-h-screen">
       {/* Hero Section - Inspired by the asymmetrical layout */}
@@ -30,46 +72,77 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Diagonal Image Placement - Four images in balanced arrangement */}
-          {/* Top Left */}
-          <div className="absolute top-20 left-12 w-56 h-72 hidden lg:block">
-            <Image
-              src="https://static.wixstatic.com/media/73b405_3bd31be1cec44a278f00dd44e17bed40~mv2.jpg"
-              alt="Traditional gold jewelry set with earrings"
-              width={224}
-              className="w-full h-full object-cover rounded-lg shadow-lg"
-            />
-          </div>
+          {/* Animated Diagonal Image Placement - Four images with smooth transitions */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentImageSet}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className="absolute inset-0"
+            >
+              {/* Top Left */}
+              <motion.div 
+                className="absolute top-16 left-8 w-56 h-72 hidden lg:block"
+                initial={{ x: -100, y: -100, opacity: 0, scale: 0.8 }}
+                animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+              >
+                <Image
+                  src={currentImages.topLeft}
+                  alt={currentImages.alts.topLeft}
+                  width={224}
+                  className="w-full h-full object-cover rounded-lg shadow-xl"
+                />
+              </motion.div>
 
-          {/* Bottom Right */}
-          <div className="absolute bottom-20 right-12 w-56 h-72 hidden lg:block">
-            <Image
-              src="https://static.wixstatic.com/media/73b405_e4849ef22cec425da9bfab75e4496287~mv2.jpg"
-              alt="Elegant gold necklace with matching earrings"
-              width={224}
-              className="w-full h-full object-cover rounded-lg shadow-lg"
-            />
-          </div>
+              {/* Top Right */}
+              <motion.div 
+                className="absolute top-16 right-8 w-56 h-72 hidden lg:block"
+                initial={{ x: 100, y: -100, opacity: 0, scale: 0.8 }}
+                animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+              >
+                <Image
+                  src={currentImages.topRight}
+                  alt={currentImages.alts.topRight}
+                  width={224}
+                  className="w-full h-full object-cover rounded-lg shadow-xl"
+                />
+              </motion.div>
 
-          {/* Top Right */}
-          <div className="absolute top-20 right-12 w-56 h-72 hidden lg:block">
-            <Image
-              src="https://static.wixstatic.com/media/73b405_39e9a6762acd4c57a0e1586d6b778da6~mv2.jpg"
-              alt="Traditional Indian gold jewelry with intricate designs"
-              width={224}
-              className="w-full h-full object-cover rounded-lg shadow-lg"
-            />
-          </div>
+              {/* Bottom Left */}
+              <motion.div 
+                className="absolute bottom-16 left-8 w-56 h-72 hidden lg:block"
+                initial={{ x: -100, y: 100, opacity: 0, scale: 0.8 }}
+                animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+              >
+                <Image
+                  src={currentImages.bottomLeft}
+                  alt={currentImages.alts.bottomLeft}
+                  width={224}
+                  className="w-full h-full object-cover rounded-lg shadow-xl"
+                />
+              </motion.div>
 
-          {/* Bottom Left */}
-          <div className="absolute bottom-20 left-12 w-56 h-72 hidden lg:block">
-            <Image
-              src="https://static.wixstatic.com/media/73b405_b149cae6b8ed45c59fa0c1d4340c98da~mv2.jpg"
-              alt="Exquisite gold necklace with traditional motifs"
-              width={224}
-              className="w-full h-full object-cover rounded-lg shadow-lg"
-            />
-          </div>
+              {/* Bottom Right */}
+              <motion.div 
+                className="absolute bottom-16 right-8 w-56 h-72 hidden lg:block"
+                initial={{ x: 100, y: 100, opacity: 0, scale: 0.8 }}
+                animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+              >
+                <Image
+                  src={currentImages.bottomRight}
+                  alt={currentImages.alts.bottomRight}
+                  width={224}
+                  className="w-full h-full object-cover rounded-lg shadow-xl"
+                />
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
 
