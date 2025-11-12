@@ -30,17 +30,19 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Asymmetrical Image Placement - Using provided jewelry images */}
-          <div className="absolute top-16 left-8 w-48 h-64 hidden lg:block">
+          {/* Diagonal Image Placement - Four images in balanced arrangement */}
+          {/* Top Left */}
+          <div className="absolute top-20 left-12 w-56 h-72 hidden lg:block">
             <Image
               src="https://static.wixstatic.com/media/73b405_3bd31be1cec44a278f00dd44e17bed40~mv2.jpg"
               alt="Traditional gold jewelry set with earrings"
-              width={192}
+              width={224}
               className="w-full h-full object-cover rounded-lg shadow-lg"
             />
           </div>
 
-          <div className="absolute bottom-20 left-16 w-56 h-72 hidden lg:block">
+          {/* Bottom Right */}
+          <div className="absolute bottom-20 right-12 w-56 h-72 hidden lg:block">
             <Image
               src="https://static.wixstatic.com/media/73b405_e4849ef22cec425da9bfab75e4496287~mv2.jpg"
               alt="Elegant gold necklace with matching earrings"
@@ -49,39 +51,22 @@ export default function HomePage() {
             />
           </div>
 
-          <div className="absolute top-24 right-12 w-52 h-68 hidden lg:block">
+          {/* Top Right */}
+          <div className="absolute top-20 right-12 w-56 h-72 hidden lg:block">
             <Image
               src="https://static.wixstatic.com/media/73b405_39e9a6762acd4c57a0e1586d6b778da6~mv2.jpg"
               alt="Traditional Indian gold jewelry with intricate designs"
-              width={208}
+              width={224}
               className="w-full h-full object-cover rounded-lg shadow-lg"
             />
           </div>
 
-          <div className="absolute bottom-32 right-8 w-44 h-56 hidden lg:block">
+          {/* Bottom Left */}
+          <div className="absolute bottom-20 left-12 w-56 h-72 hidden lg:block">
             <Image
               src="https://static.wixstatic.com/media/73b405_b149cae6b8ed45c59fa0c1d4340c98da~mv2.jpg"
               alt="Exquisite gold necklace with traditional motifs"
-              width={176}
-              className="w-full h-full object-cover rounded-lg shadow-lg"
-            />
-          </div>
-
-          {/* Additional images for enhanced visual richness */}
-          <div className="absolute top-40 left-32 w-40 h-52 hidden xl:block">
-            <Image
-              src="https://static.wixstatic.com/media/73b405_95a47a76a4ea4c75a3f59b6398b61a2f~mv2.jpg"
-              alt="Ornate gold necklace with detailed craftsmanship"
-              width={160}
-              className="w-full h-full object-cover rounded-lg shadow-lg"
-            />
-          </div>
-
-          <div className="absolute bottom-48 right-32 w-44 h-60 hidden xl:block">
-            <Image
-              src="https://static.wixstatic.com/media/73b405_91b5d5ce389747bba4f76b390ebbd4a3~mv2.jpg"
-              alt="Luxury diamond and emerald necklace"
-              width={176}
+              width={224}
               className="w-full h-full object-cover rounded-lg shadow-lg"
             />
           </div>
