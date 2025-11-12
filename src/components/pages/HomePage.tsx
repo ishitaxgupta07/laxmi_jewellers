@@ -8,44 +8,48 @@ import { Sparkles, Shield, Award, Heart } from 'lucide-react';
 export default function HomePage() {
   const [currentImageSet, setCurrentImageSet] = useState(0);
 
-  // Define image sets for rotation
-  const imageSets = [
+  // Define image sets for left and right side rotation
+  const leftSideImages = [
     {
-      topLeft: "https://static.wixstatic.com/media/73b405_3bd31be1cec44a278f00dd44e17bed40~mv2.jpg",
-      topRight: "https://static.wixstatic.com/media/73b405_39e9a6762acd4c57a0e1586d6b778da6~mv2.jpg",
-      bottomLeft: "https://static.wixstatic.com/media/73b405_b149cae6b8ed45c59fa0c1d4340c98da~mv2.jpg",
-      bottomRight: "https://static.wixstatic.com/media/73b405_e4849ef22cec425da9bfab75e4496287~mv2.jpg",
-      alts: {
-        topLeft: "Traditional gold jewelry set with earrings",
-        topRight: "Traditional Indian gold jewelry with intricate designs",
-        bottomLeft: "Exquisite gold necklace with traditional motifs",
-        bottomRight: "Elegant gold necklace with matching earrings"
-      }
+      src: "https://static.wixstatic.com/media/73b405_3bd31be1cec44a278f00dd44e17bed40~mv2.jpg",
+      alt: "Traditional gold jewelry set with earrings"
     },
     {
-      topLeft: "https://static.wixstatic.com/media/73b405_95a47a76a4ea4c75a3f59b6398b61a2f~mv2.jpg",
-      topRight: "https://static.wixstatic.com/media/73b405_91b5d5ce389747bba4f76b390ebbd4a3~mv2.jpg",
-      bottomLeft: "https://static.wixstatic.com/media/73b405_3bd31be1cec44a278f00dd44e17bed40~mv2.jpg",
-      bottomRight: "https://static.wixstatic.com/media/73b405_39e9a6762acd4c57a0e1586d6b778da6~mv2.jpg",
-      alts: {
-        topLeft: "Ornate gold necklace with detailed craftsmanship",
-        topRight: "Luxury diamond and emerald necklace",
-        bottomLeft: "Traditional gold jewelry set with earrings",
-        bottomRight: "Traditional Indian gold jewelry with intricate designs"
-      }
+      src: "https://static.wixstatic.com/media/73b405_b149cae6b8ed45c59fa0c1d4340c98da~mv2.jpg",
+      alt: "Exquisite gold necklace with traditional motifs"
+    },
+    {
+      src: "https://static.wixstatic.com/media/73b405_95a47a76a4ea4c75a3f59b6398b61a2f~mv2.jpg",
+      alt: "Ornate gold necklace with detailed craftsmanship"
+    }
+  ];
+
+  const rightSideImages = [
+    {
+      src: "https://static.wixstatic.com/media/73b405_39e9a6762acd4c57a0e1586d6b778da6~mv2.jpg",
+      alt: "Traditional Indian gold jewelry with intricate designs"
+    },
+    {
+      src: "https://static.wixstatic.com/media/73b405_e4849ef22cec425da9bfab75e4496287~mv2.jpg",
+      alt: "Elegant gold necklace with matching earrings"
+    },
+    {
+      src: "https://static.wixstatic.com/media/73b405_91b5d5ce389747bba4f76b390ebbd4a3~mv2.jpg",
+      alt: "Luxury diamond and emerald necklace"
     }
   ];
 
   // Timer for image rotation
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentImageSet((prev) => (prev + 1) % imageSets.length);
+      setCurrentImageSet((prev) => (prev + 1) % leftSideImages.length);
     }, 5000); // 5 seconds
 
     return () => clearInterval(timer);
-  }, [imageSets.length]);
+  }, [leftSideImages.length]);
 
-  const currentImages = imageSets[currentImageSet];
+  const currentLeftImage = leftSideImages[currentImageSet];
+  const currentRightImage = rightSideImages[currentImageSet];
   return (
     <div className="min-h-screen">
       {/* Hero Section - Inspired by the asymmetrical layout */}
@@ -72,77 +76,67 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Animated Diagonal Image Placement - Four images with smooth transitions */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentImageSet}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-              className="absolute inset-0"
-            >
-              {/* Top Left */}
-              <motion.div 
-                className="absolute top-16 left-8 w-56 h-72 hidden lg:block"
-                initial={{ x: -100, y: -100, opacity: 0, scale: 0.8 }}
-                animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-              >
-                <Image
-                  src={currentImages.topLeft}
-                  alt={currentImages.alts.topLeft}
-                  width={224}
-                  className="w-full h-full object-cover rounded-lg shadow-xl"
-                />
-              </motion.div>
+          {/* Elegant Left and Right Image Animation */}
+          <div className="absolute inset-0 hidden lg:block">
+            {/* Left Side Image */}
+            <div className="absolute left-12 top-1/2 -translate-y-1/2 w-72 h-96">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`left-${currentImageSet}`}
+                  initial={{ opacity: 0, x: -50, scale: 0.9, rotateY: -15 }}
+                  animate={{ opacity: 1, x: 0, scale: 1, rotateY: 0 }}
+                  exit={{ opacity: 0, x: -30, scale: 0.95, rotateY: 15 }}
+                  transition={{ 
+                    duration: 1.2, 
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                    opacity: { duration: 0.8 }
+                  }}
+                  className="w-full h-full"
+                >
+                  <div className="relative w-full h-full group">
+                    <Image
+                      src={currentLeftImage.src}
+                      alt={currentLeftImage.alt}
+                      width={288}
+                      className="w-full h-full object-cover rounded-2xl shadow-2xl transform transition-transform duration-700 group-hover:scale-105"
+                    />
+                    {/* Elegant overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-              {/* Top Right */}
-              <motion.div 
-                className="absolute top-16 right-8 w-56 h-72 hidden lg:block"
-                initial={{ x: 100, y: -100, opacity: 0, scale: 0.8 }}
-                animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-              >
-                <Image
-                  src={currentImages.topRight}
-                  alt={currentImages.alts.topRight}
-                  width={224}
-                  className="w-full h-full object-cover rounded-lg shadow-xl"
-                />
-              </motion.div>
-
-              {/* Bottom Left */}
-              <motion.div 
-                className="absolute bottom-16 left-8 w-56 h-72 hidden lg:block"
-                initial={{ x: -100, y: 100, opacity: 0, scale: 0.8 }}
-                animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-              >
-                <Image
-                  src={currentImages.bottomLeft}
-                  alt={currentImages.alts.bottomLeft}
-                  width={224}
-                  className="w-full h-full object-cover rounded-lg shadow-xl"
-                />
-              </motion.div>
-
-              {/* Bottom Right */}
-              <motion.div 
-                className="absolute bottom-16 right-8 w-56 h-72 hidden lg:block"
-                initial={{ x: 100, y: 100, opacity: 0, scale: 0.8 }}
-                animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-              >
-                <Image
-                  src={currentImages.bottomRight}
-                  alt={currentImages.alts.bottomRight}
-                  width={224}
-                  className="w-full h-full object-cover rounded-lg shadow-xl"
-                />
-              </motion.div>
-            </motion.div>
-          </AnimatePresence>
+            {/* Right Side Image */}
+            <div className="absolute right-12 top-1/2 -translate-y-1/2 w-72 h-96">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`right-${currentImageSet}`}
+                  initial={{ opacity: 0, x: 50, scale: 0.9, rotateY: 15 }}
+                  animate={{ opacity: 1, x: 0, scale: 1, rotateY: 0 }}
+                  exit={{ opacity: 0, x: 30, scale: 0.95, rotateY: -15 }}
+                  transition={{ 
+                    duration: 1.2, 
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                    opacity: { duration: 0.8 },
+                    delay: 0.2
+                  }}
+                  className="w-full h-full"
+                >
+                  <div className="relative w-full h-full group">
+                    <Image
+                      src={currentRightImage.src}
+                      alt={currentRightImage.alt}
+                      width={288}
+                      className="w-full h-full object-cover rounded-2xl shadow-2xl transform transition-transform duration-700 group-hover:scale-105"
+                    />
+                    {/* Elegant overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-transparent to-black/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
       </section>
 
