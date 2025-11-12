@@ -139,7 +139,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* Trust Indicators */}
       <section className="bg-secondary py-16">
         <div className="max-w-[100rem] mx-auto px-6">
@@ -167,7 +166,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* Categories Section */}
       <section className="bg-background py-20">
         <div className="max-w-[100rem] mx-auto px-6">
@@ -191,8 +189,8 @@ export default function HomePage() {
 
             <Link to="/store" className="group">
               <div className="bg-secondary rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                <div className="w-16 h-16 bg-softaccent rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Sparkles className="w-8 h-8 text-buttonbackground" />
+                <div className="w-16 h-16 bg-softaccent rounded-full mx-auto mb-6 flex items-center justify-center shadow-[0px_0px_4px_0px_#bfbfbf]">
+
                 </div>
                 <h3 className="font-heading text-2xl text-secondary-foreground mb-3">Diamond Jewelry</h3>
                 <p className="font-paragraph text-secondary-foreground/80">Brilliant cuts and exceptional clarity</p>
@@ -221,7 +219,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* Brand Story Section */}
       <section className="bg-primary py-20">
         <div className="max-w-[100rem] mx-auto px-6">
@@ -253,7 +250,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* Call to Action */}
       <section className="bg-secondary py-16">
         <div className="max-w-[100rem] mx-auto px-6 text-center">

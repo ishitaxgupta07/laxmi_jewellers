@@ -166,7 +166,7 @@ function Footer() {
           <div>
             <h4 className="font-heading text-lg mb-4">Services</h4>
             <div className="space-y-2">
-              <p className="font-paragraph text-primary-foreground/80">Certified Diamonds</p>
+              <p className="font-paragraph text-primary-foreground/80">{"Certified Gold & Diamonds"}</p>
               <p className="font-paragraph text-primary-foreground/80">Lifetime Maintenance</p>
               <p className="font-paragraph text-primary-foreground/80">Buyback Guarantee</p>
               <p className="font-paragraph text-primary-foreground/80">Safe Shipping</p>
