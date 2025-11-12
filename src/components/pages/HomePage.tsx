@@ -244,7 +244,7 @@ export default function HomePage() {
             </div>
             <div className="relative">
               <Image
-                src="https://i.pinimg.com/736x/af/a2/24/afa22453a83946df4e7acb93d3ae74c1.jpg"
+                src="https://i.pinimg.com/1200x/c6/ba/82/c6ba82cc2f1c5d540198b66174cbd1a8.jpg"
                 alt="Skilled craftsman creating jewelry"
                 width={600}
                 className="w-full h-96 object-cover rounded-lg shadow-lg"
