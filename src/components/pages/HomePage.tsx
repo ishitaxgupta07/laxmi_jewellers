@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
-import { Sparkles, Shield, Award, Heart } from 'lucide-react';
+import { Sparkles, Shield, Award, Heart, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function HomePage() {
   const [currentImageSet, setCurrentImageSet] = useState(0);
@@ -273,6 +273,92 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Contact Footer Section */}
+      <footer className="bg-primary py-12">
+        <div className="max-w-[100rem] mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-primary-foreground">
+            
+            {/* Company Info */}
+            <div>
+              <h3 className="font-heading text-xl mb-4">Laxmi Jewellers</h3>
+              <p className="font-paragraph text-sm text-primary-foreground/80 leading-relaxed">
+                Crafting timeless elegance for over three decades. Your trusted partner in fine jewelry.
+              </p>
+              <p className="font-paragraph text-sm text-primary-foreground/80 mt-3">
+                Certified diamonds, lifetime maintenance, and exceptional craftsmanship.
+              </p>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="font-heading text-lg mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link to="/store" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                    Shop Collection
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/customization" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                    Custom Design
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Services */}
+            <div>
+              <h4 className="font-heading text-lg mb-4">Services</h4>
+              <ul className="space-y-2 text-sm">
+                <li className="font-paragraph text-primary-foreground/80">Certified Diamonds</li>
+                <li className="font-paragraph text-primary-foreground/80">Lifetime Maintenance</li>
+                <li className="font-paragraph text-primary-foreground/80">Buyback Guarantee</li>
+                <li className="font-paragraph text-primary-foreground/80">Safe Shipping</li>
+                <li className="font-paragraph text-primary-foreground/80">Gift Cards</li>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="font-heading text-lg mb-4">Contact</h4>
+              <div className="space-y-3 text-sm">
+                <div className="flex items-start gap-2">
+                  <Mail className="w-4 h-4 mt-0.5 text-primary-foreground/60" />
+                  <a href="mailto:manish16121976.ig@gmail.com" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                    manish16121976.ig@gmail.com
+                  </a>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Phone className="w-4 h-4 mt-0.5 text-primary-foreground/60" />
+                  <a href="tel:+917739134542" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                    +91 7739134542
+                  </a>
+                </div>
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 mt-0.5 text-primary-foreground/60" />
+                  <div className="font-paragraph text-primary-foreground/80">
+                    <div>Address: 123, Jewelry Street</div>
+                    <div>Ramnagri More, Ashiana Digha Road</div>
+                    <div>Patna - 800025</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
