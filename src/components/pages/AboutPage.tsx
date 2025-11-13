@@ -66,8 +66,8 @@ export default function AboutPage() {
             </div>
             <div className="relative">
               <Image
-                src="https://static.wixstatic.com/media/73b405_8427721386ca4565bd67f9b77b8f9be3~mv2.jpg"
-                alt="Traditional jewelry collection with ornate necklace and earrings"
+                src="https://static.wixstatic.com/media/73b405_d2a1433fd38d42e2a810dc9dda1d2856~mv2.png"
+                alt="Elegant gold jewelry set with ornate necklace and matching earrings on green background"
                 width={600}
                 className="w-full h-96 object-cover rounded-lg shadow-lg"
               />
