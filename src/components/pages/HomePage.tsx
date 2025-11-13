@@ -174,10 +174,16 @@ export default function HomePage() {
                 originWidth={600}
                 originHeight={600} />
               <h3 className="font-heading text-xl text-secondary-foreground mb-2">IGI Certified Diamonds</h3>
-              <p className="font-paragraph text-secondary-foreground/80">Authentic diamonds with IGI certification guaranteeing quality and excellence</p>
+              <p className="font-paragraph text-secondary-foreground/80">{"Authentic diamonds with IGI certification guaranteed"}</p>
             </div>
             <div className="text-center">
-              <Heart className="w-12 h-12 text-buttonbackground mx-auto mb-4" />
+              <Image 
+                src="https://static.wixstatic.com/media/73b405_320d6b5bc9064dbdba79aabd75332ede~mv2.jpg"
+                alt="Custom designed gold jewelry set with intricate patterns"
+                width={96}
+                height={96}
+                className="w-24 h-24 object-cover rounded-lg mx-auto mb-4"
+              />
               <h3 className="font-heading text-xl text-secondary-foreground mb-2">Custom Design</h3>
               <p className="font-paragraph text-secondary-foreground/80">Personalized jewelry crafted to perfection</p>
             </div>
