@@ -229,12 +229,12 @@ export default function HomePage() {
               <div className="bg-secondary rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
                 <div className="w-16 h-16 bg-softaccent rounded-full mx-auto mb-6 flex items-center justify-center overflow-hidden">
                   <Image
-                    src="https://static.wixstatic.com/media/73b405_346ccdc9a4a04082a3eafb57b95f71b1~mv2.jpg"
-                    alt="Elegant gold necklace with pearls"
+                    src="https://static.wixstatic.com/media/73b405_83e2a6698f8245938b5445f356cbe66c~mv2.jpg"
                     className="w-full h-full object-cover"
                     width={64}
                     height={64}
-                  />
+                    originWidth={736}
+                    originHeight={980} />
                 </div>
                 <h3 className="font-heading text-2xl text-secondary-foreground mb-3">Silver Jewelry</h3>
                 <p className="font-paragraph text-secondary-foreground/80">Contemporary designs in sterling silver</p>
