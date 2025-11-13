@@ -293,20 +293,20 @@ export default function ContactPage() {
           <div className="bg-secondary rounded-lg p-8">
             <div className="w-full h-96 rounded-lg overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.2345678901234!2d85.1376!3d25.5941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed58dce6732867%3A0x4059b8de2b8b8b8b!2sRamnagri%20More%2C%20Ashiana%20Digha%20Road%2C%20Patna%2C%20Bihar%20800025!5e0!3m2!1sen!2sin!4v1699123456789!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.2345678901234!2d85.1376!3d25.5941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed58dce6732867%3A0x4059b8de2b8b8b8b!2sRamnagari%20more%2C%20Ashiana%20-%20Digha%20Rd%2C%20Raja%20Bazar%2C%20Patna%2C%20Bihar%20800025!5e0!3m2!1sen!2sin!4v1699123456789!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Ramnagri More, Ashiana Digha Road, Patna - 800025"
+                title="Ramnagari more, Ashiana - Digha Rd, Raja Bazar, Patna, Bihar 800025"
               ></iframe>
             </div>
             <div className="mt-4 text-center">
               <p className="font-paragraph text-secondary-foreground">
                 <MapPin className="w-5 h-5 inline-block mr-2" />
-                Ramnagri More, Ashiana Digha Road, Patna - 800025
+                Ramnagari more, Ashiana - Digha Rd, Raja Bazar, Patna, Bihar 800025
               </p>
             </div>
           </div>
