@@ -216,40 +216,6 @@ export default function AboutPage() {
       </section>
       {/* Awards & Recognition */}
       <section className="bg-secondary py-20">
-        <div className="max-w-[100rem] mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-4xl text-secondary-foreground mb-4">Awards & Recognition</h2>
-            <p className="font-paragraph text-lg text-secondary-foreground/80 max-w-3xl mx-auto">
-              Our commitment to excellence has been recognized by industry leaders and customers alike
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-20 h-20 bg-softaccent rounded-full mx-auto mb-6 flex items-center justify-center">
-                <Award className="w-10 h-10 text-buttonbackground" />
-              </div>
-              <h3 className="font-heading text-xl text-secondary-foreground mb-2">Best Jewelry Store 2023</h3>
-              <p className="font-paragraph text-secondary-foreground/80">Mumbai Retail Excellence Awards</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-20 h-20 bg-softaccent rounded-full mx-auto mb-6 flex items-center justify-center">
-                <Shield className="w-10 h-10 text-buttonbackground" />
-              </div>
-              <h3 className="font-heading text-xl text-secondary-foreground mb-2">Certified Diamond Dealer</h3>
-              <p className="font-paragraph text-secondary-foreground/80">Gemological Institute of India</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-20 h-20 bg-softaccent rounded-full mx-auto mb-6 flex items-center justify-center">
-                <Heart className="w-10 h-10 text-buttonbackground" />
-              </div>
-              <h3 className="font-heading text-xl text-secondary-foreground mb-2">Customer Choice Award</h3>
-              <p className="font-paragraph text-secondary-foreground/80">India Jewelry Federation</p>
-            </div>
-          </div>
-        </div>
       </section>
     </div>
   );
