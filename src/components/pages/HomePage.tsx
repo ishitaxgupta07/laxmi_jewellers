@@ -227,8 +227,14 @@ export default function HomePage() {
 
             <Link to="/store" className="group">
               <div className="bg-secondary rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                <div className="w-16 h-16 bg-softaccent rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Sparkles className="w-8 h-8 text-buttonbackground" />
+                <div className="w-16 h-16 bg-softaccent rounded-full mx-auto mb-6 flex items-center justify-center overflow-hidden">
+                  <Image
+                    src="https://static.wixstatic.com/media/73b405_346ccdc9a4a04082a3eafb57b95f71b1~mv2.jpg"
+                    alt="Elegant gold necklace with pearls"
+                    className="w-full h-full object-cover"
+                    width={64}
+                    height={64}
+                  />
                 </div>
                 <h3 className="font-heading text-2xl text-secondary-foreground mb-3">Silver Jewelry</h3>
                 <p className="font-paragraph text-secondary-foreground/80">Contemporary designs in sterling silver</p>
