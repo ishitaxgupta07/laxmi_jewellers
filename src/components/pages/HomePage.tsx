@@ -212,7 +212,7 @@ export default function HomePage() {
                     height={64}
                   />
                 </div>
-                <h3 className="font-heading text-2xl text-secondary-foreground mb-3">Gold Jewelry</h3>
+                <h3 className="font-heading text-2xl text-secondary-foreground mb-3">{"Gold Jewellery"}</h3>
                 <p className="font-paragraph text-secondary-foreground/80">{"Timeless pieces in yellow and rose gold"}</p>
               </div>
             </Link>
@@ -228,7 +228,7 @@ export default function HomePage() {
                     height={64}
                   />
                 </div>
-                <h3 className="font-heading text-2xl text-secondary-foreground mb-3">Diamond Jewelry</h3>
+                <h3 className="font-heading text-2xl text-secondary-foreground mb-3">{"Diamond Jewellery"}</h3>
                 <p className="font-paragraph text-secondary-foreground/80">Brilliant cuts and exceptional clarity</p>
               </div>
             </Link>
@@ -244,7 +244,7 @@ export default function HomePage() {
                     height={64}
                   />
                 </div>
-                <h3 className="font-heading text-2xl text-secondary-foreground mb-3">Platinum Jewelry</h3>
+                <h3 className="font-heading text-2xl text-secondary-foreground mb-3">{"Platinum Jewellery"}</h3>
                 <p className="font-paragraph text-secondary-foreground/80">Pure elegance in the finest metal</p>
               </div>
             </Link>
@@ -260,7 +260,7 @@ export default function HomePage() {
                     originWidth={736}
                     originHeight={980} />
                 </div>
-                <h3 className="font-heading text-2xl text-secondary-foreground mb-3">Silver Jewelry</h3>
+                <h3 className="font-heading text-2xl text-secondary-foreground mb-3">{"Silver Jewellery"}</h3>
                 <p className="font-paragraph text-secondary-foreground/80">Contemporary designs in sterling silver</p>
               </div>
             </Link>
