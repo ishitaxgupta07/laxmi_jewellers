@@ -5,6 +5,7 @@ import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { Sparkles, Shield, Award, Heart } from 'lucide-react';
 import { WhatsAppChatButton } from '@/components/ui/whatsapp-chat-button';
+import { GoldSilverRates } from '@/components/ui/gold-silver-rates';
 
 export default function HomePage() {
   const [currentImageSet, setCurrentImageSet] = useState(0);
@@ -191,6 +192,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      
+      {/* Live Gold & Silver Rates Section */}
+      <GoldSilverRates apiKey="your_api_key_here" />
+      
       {/* Categories Section */}
       <section className="bg-background py-20">
         <div className="max-w-[100rem] mx-auto px-6">
