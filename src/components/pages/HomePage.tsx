@@ -144,6 +144,16 @@ export default function HomePage() {
         <div className="max-w-[100rem] mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
+              <Image
+                src="https://static.wixstatic.com/media/73b405_d830c238ef3b4a15997804c1138aa260~mv2.png?originWidth=128&originHeight=128"
+                alt="BIS HUID Hallmarked - Bureau of Indian Standards Hallmarking"
+                width={48}
+                className="mx-auto mb-4"
+                originWidth={300}
+                originHeight={300}
+              />
+              <h3 className="font-heading text-xl text-secondary-foreground mb-2">BIS HUID Hallmarked</h3>
+              <p className="font-paragraph text-secondary-foreground/80">Certified purity and quality assurance</p>
             </div>
             <div className="text-center">
               <Image
