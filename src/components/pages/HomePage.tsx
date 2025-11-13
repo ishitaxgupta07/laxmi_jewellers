@@ -144,14 +144,6 @@ export default function HomePage() {
         <div className="max-w-[100rem] mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
-              <Image
-                src="https://static.wixstatic.com/media/73b405_7e2ef32252684e1c8794503c67df53fa~mv2.jpg"
-                width={120}
-                className="mx-auto mb-4 border-4 rounded-lg shadow-lg"
-                style={{ borderColor: '#3B4A3A' }}
-                originWidth={185}
-                originHeight={244} />
-
             </div>
             <div className="text-center">
               <Image
