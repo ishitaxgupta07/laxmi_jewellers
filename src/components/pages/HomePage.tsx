@@ -145,12 +145,12 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <Image
-                src="https://static.wixstatic.com/media/73b405_97178297ea1f44e18ab5902458f787cd~mv2.jpg"
+                src="https://static.wixstatic.com/media/73b405_fc70b4145ef845e9bab05061f7607018~mv2.png?originWidth=448&originHeight=448"
                 width={48}
                 height={48}
                 className="mx-auto mb-4"
-                originWidth={272}
-                originHeight={185} />
+                originWidth={448}
+                originHeight={448} />
               <h3 className="font-heading text-xl text-secondary-foreground mb-2">BIS HUID Hallmarked</h3>
               <p className="font-paragraph text-secondary-foreground/80">Certified purity and quality assurance</p>
             </div>
