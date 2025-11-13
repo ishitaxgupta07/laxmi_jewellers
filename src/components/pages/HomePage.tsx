@@ -179,11 +179,17 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Link to="/store" className="group">
               <div className="bg-secondary rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                <div className="w-16 h-16 bg-softaccent rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Sparkles className="w-8 h-8 text-buttonbackground" />
+                <div className="w-16 h-16 rounded-full mx-auto mb-6 overflow-hidden">
+                  <Image 
+                    src="https://static.wixstatic.com/media/73b405_4dc59fbd5bd7490eb371913e990b9390~mv2.jpg" 
+                    alt="Gold jewelry necklace display"
+                    className="w-full h-full object-cover"
+                    width={64}
+                    height={64}
+                  />
                 </div>
                 <h3 className="font-heading text-2xl text-secondary-foreground mb-3">Gold Jewelry</h3>
-                <p className="font-paragraph text-secondary-foreground/80">Timeless pieces in yellow, white, and rose gold</p>
+                <p className="font-paragraph text-secondary-foreground/80">{"Timeless pieces in yellow and rose gold"}</p>
               </div>
             </Link>
 

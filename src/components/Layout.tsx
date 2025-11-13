@@ -138,9 +138,7 @@ function Footer() {
             <p className="font-paragraph text-primary-foreground/80 mb-4">
               Crafting timeless elegance for over three decades. Your trusted partner in fine jewelry.
             </p>
-            <p className="font-paragraph text-primary-foreground/80">
-              Certified diamonds, lifetime maintenance, and exceptional craftsmanship.
-            </p>
+            <p className="font-paragraph text-primary-foreground/80">{"Certified gold and diamonds, lifetime maintenance, and exceptional craftsmanship."}</p>
           </div>
 
           {/* Quick Links */}
