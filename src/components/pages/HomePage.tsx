@@ -144,9 +144,12 @@ export default function HomePage() {
         <div className="max-w-[100rem] mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
-              <Shield className="w-12 h-12 text-buttonbackground mx-auto mb-4" />
-              <h3 className="font-heading text-xl text-secondary-foreground mb-2">Certified Diamonds</h3>
-              <p className="font-paragraph text-secondary-foreground/80">Every diamond comes with international certification</p>
+              <Image 
+                src="https://static.wixstatic.com/media/73b405_74866fd55d2e447ba60c52d0d732f108~mv2.png" 
+                alt="BIS HUID Hallmarked certification logo" 
+                width={120}
+                className="mx-auto mb-4"
+              />
             </div>
             <div className="text-center">
               <Award className="w-12 h-12 text-buttonbackground mx-auto mb-4" />
