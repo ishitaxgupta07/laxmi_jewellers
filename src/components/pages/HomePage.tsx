@@ -195,8 +195,14 @@ export default function HomePage() {
 
             <Link to="/store" className="group">
               <div className="bg-secondary rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                <div className="w-16 h-16 bg-softaccent rounded-full mx-auto mb-6 flex items-center justify-center shadow-[0px_0px_4px_0px_#bfbfbf]">
-
+                <div className="w-16 h-16 rounded-full mx-auto mb-6 overflow-hidden">
+                  <Image 
+                    src="https://static.wixstatic.com/media/73b405_42bddd0b86c64597be213e700b6d7fb9~mv2.jpg" 
+                    alt="Diamond necklace with intricate design"
+                    className="w-full h-full object-cover"
+                    width={64}
+                    height={64}
+                  />
                 </div>
                 <h3 className="font-heading text-2xl text-secondary-foreground mb-3">Diamond Jewelry</h3>
                 <p className="font-paragraph text-secondary-foreground/80">Brilliant cuts and exceptional clarity</p>
