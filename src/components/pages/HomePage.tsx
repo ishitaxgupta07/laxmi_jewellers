@@ -211,8 +211,14 @@ export default function HomePage() {
 
             <Link to="/store" className="group">
               <div className="bg-secondary rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                <div className="w-16 h-16 bg-softaccent rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Sparkles className="w-8 h-8 text-buttonbackground" />
+                <div className="w-16 h-16 rounded-full mx-auto mb-6 overflow-hidden">
+                  <Image 
+                    src="https://static.wixstatic.com/media/73b405_6753a1e586b84636b896dc8490e2d674~mv2.jpg" 
+                    alt="Elegant diamond tennis necklace"
+                    className="w-full h-full object-cover"
+                    width={64}
+                    height={64}
+                  />
                 </div>
                 <h3 className="font-heading text-2xl text-secondary-foreground mb-3">Platinum Jewelry</h3>
                 <p className="font-paragraph text-secondary-foreground/80">Pure elegance in the finest metal</p>
