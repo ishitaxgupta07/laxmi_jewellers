@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { Sparkles, Shield, Award, Heart } from 'lucide-react';
+import LiveMetalRates from '@/components/LiveMetalRates';
 
 export default function HomePage() {
   const [currentImageSet, setCurrentImageSet] = useState(0);
@@ -139,6 +140,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Live Metal Rates Section */}
+      <LiveMetalRates />
+
       {/* Trust Indicators */}
       <section className="bg-secondary py-16">
         <div className="max-w-[100rem] mx-auto px-6">
