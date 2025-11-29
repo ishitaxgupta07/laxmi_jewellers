@@ -1,5 +1,4 @@
 import { response } from 'wix-http-functions';
-import { getSecret } from 'wix-secrets-backend';
 import { query } from 'wix-data';
 
 const CACHE_DURATION_MARKET_HOURS = 5 * 60 * 1000; // 5 minutes
@@ -16,6 +15,8 @@ interface RatesData {
   silverPerKg: number;
   timestamp: string;
   source: string;
+  gold10gm?: number; // Per 10 grams
+  silver10gm?: number; // Per 10 grams
 }
 
 interface CacheEntry {
@@ -40,12 +41,12 @@ function isMarketHours(): boolean {
   return true;
 }
 
-async function fetchWithBackoff(url: string, apiKey: string, retries = 0): Promise<any> {
+async function fetchWithBackoff(url: string, retries = 0): Promise<any> {
   try {
     const response = await fetch(url, {
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
       },
     });
 
@@ -58,8 +59,39 @@ async function fetchWithBackoff(url: string, apiKey: string, retries = 0): Promi
     if (retries < MAX_RETRIES) {
       const backoffDelay = INITIAL_BACKOFF * Math.pow(2, retries);
       await new Promise(resolve => setTimeout(resolve, backoffDelay));
-      return fetchWithBackoff(url, apiKey, retries + 1);
+      return fetchWithBackoff(url, retries + 1);
     }
+    throw error;
+  }
+}
+
+async function fetchBullionsCoInRates(): Promise<RatesData> {
+  try {
+    // Fetch from bullions.co.in
+    const apiUrl = 'https://bullions.co.in/api/rates';
+    const apiData = await fetchWithBackoff(apiUrl);
+
+    // Parse the response - bullions.co.in returns rates per gram
+    // We need to calculate per 10 grams
+    const goldPerGram = parseFloat(apiData.gold) || 0;
+    const silverPerGram = parseFloat(apiData.silver) || 0;
+
+    const ratesData: RatesData = {
+      city: 'India',
+      gold24k: goldPerGram,
+      gold22k: goldPerGram * 0.916, // Approximate conversion
+      gold18k: goldPerGram * 0.75, // Approximate conversion
+      silverPerGram: silverPerGram,
+      silverPerKg: silverPerGram * 1000,
+      gold10gm: goldPerGram * 10, // Per 10 grams
+      silver10gm: silverPerGram * 10, // Per 10 grams
+      timestamp: new Date().toISOString(),
+      source: 'Bullions.co.in',
+    };
+
+    return ratesData;
+  } catch (error) {
+    console.error('Error fetching from bullions.co.in:', error);
     throw error;
   }
 }
@@ -75,14 +107,16 @@ async function getLastSuccessfulRates(): Promise<RatesData | null> {
     if (results.items.length > 0) {
       const item = results.items[0];
       return {
-        city: item.city || 'Mumbai',
+        city: item.city || 'India',
         gold24k: item.gold24k || 0,
         gold22k: item.gold22k || 0,
         gold18k: item.gold18k || 0,
         silverPerGram: item.silverPerGram || 0,
         silverPerKg: item.silverPerKg || 0,
+        gold10gm: item.gold10gm || 0,
+        silver10gm: item.silver10gm || 0,
         timestamp: item._updatedDate instanceof Date ? item._updatedDate.toISOString() : (item._updatedDate || new Date().toISOString()),
-        source: item.source || 'IBJA',
+        source: item.source || 'Bullions.co.in',
       };
     }
   } catch (error) {
@@ -107,6 +141,8 @@ async function saveRatesToDatabase(data: RatesData): Promise<void> {
         gold18k: data.gold18k,
         silverPerGram: data.silverPerGram,
         silverPerKg: data.silverPerKg,
+        gold10gm: data.gold10gm,
+        silver10gm: data.silver10gm,
         timestamp: new Date(data.timestamp),
         source: data.source,
         isActive: true,
@@ -120,6 +156,8 @@ async function saveRatesToDatabase(data: RatesData): Promise<void> {
         gold18k: data.gold18k,
         silverPerGram: data.silverPerGram,
         silverPerKg: data.silverPerKg,
+        gold10gm: data.gold10gm,
+        silver10gm: data.silver10gm,
         timestamp: new Date(data.timestamp),
         source: data.source,
         isActive: true,
@@ -147,27 +185,8 @@ export async function get_fetch_gold_silver_rates(request: any) {
       });
     }
 
-    // Get API key from Wix Secrets Manager
-    const apiKey = await getSecret('GOLD_RATES_API_KEY');
-    if (!apiKey) {
-      throw new Error('API key not configured');
-    }
-
-    // Fetch from API
-    const apiUrl = 'https://api.indiagoldratesapi.com/latest';
-    const apiData = await fetchWithBackoff(apiUrl, apiKey);
-
-    // Parse API response
-    const ratesData: RatesData = {
-      city: apiData.city || 'Mumbai',
-      gold24k: parseFloat(apiData.gold24k) || 0,
-      gold22k: parseFloat(apiData.gold22k) || 0,
-      gold18k: parseFloat(apiData.gold18k) || 0,
-      silverPerGram: parseFloat(apiData.silverPerGram) || 0,
-      silverPerKg: parseFloat(apiData.silverPerKg) || 0,
-      timestamp: new Date().toISOString(),
-      source: 'IBJA',
-    };
+    // Fetch from bullions.co.in
+    const ratesData = await fetchBullionsCoInRates();
 
     // Update cache
     cache = {

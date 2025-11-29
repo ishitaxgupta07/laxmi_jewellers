@@ -9,18 +9,22 @@ export interface RatesData {
   silverPerKg: number;
   timestamp: string;
   source: string;
+  gold10gm?: number;
+  silver10gm?: number;
 }
 
 // Demo data for development/testing
 const DEMO_RATES: RatesData = {
-  city: 'Mumbai',
+  city: 'India',
   gold24k: 7450,
   gold22k: 6830,
   gold18k: 5730,
   silverPerGram: 92.50,
   silverPerKg: 92500,
+  gold10gm: 74500,
+  silver10gm: 925,
   timestamp: new Date().toISOString(),
-  source: 'IBJA',
+  source: 'Bullions.co.in',
 };
 
 interface RatesStore {

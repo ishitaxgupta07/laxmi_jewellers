@@ -19,6 +19,8 @@ interface RatesData {
   silverPerKg: number;
   timestamp: string;
   source: string;
+  gold10gm?: number;
+  silver10gm?: number;
 }
 
 export default function GoldSilverRatesBanner() {
@@ -149,12 +151,12 @@ export default function GoldSilverRatesBanner() {
             {/* Center: Key rates (compact) */}
             <div className="hidden md:flex items-center gap-4 text-sm">
               <div className="text-center">
-                <div className="text-xs text-foreground/70">Gold 24K</div>
-                <div className="font-semibold">₹{rates.gold24k.toFixed(0)}</div>
+                <div className="text-xs text-foreground/70">Gold 24K (10g)</div>
+                <div className="font-semibold">₹{rates.gold10gm ? rates.gold10gm.toFixed(0) : (rates.gold24k * 10).toFixed(0)}</div>
               </div>
               <div className="text-center">
-                <div className="text-xs text-foreground/70">Silver</div>
-                <div className="font-semibold">₹{rates.silverPerGram.toFixed(0)}</div>
+                <div className="text-xs text-foreground/70">Silver (10g)</div>
+                <div className="font-semibold">₹{rates.silver10gm ? rates.silver10gm.toFixed(0) : (rates.silverPerGram * 10).toFixed(0)}</div>
               </div>
             </div>
 
@@ -190,35 +192,35 @@ export default function GoldSilverRatesBanner() {
             </div>
           </div>
 
-          {/* Expanded view (mobile) */}
-          <AnimatePresence>
-            {isExpanded && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.2 }}
-                className="mt-3 pt-3 border-t border-foreground/20 grid grid-cols-2 gap-3 md:hidden"
-              >
-                <div className="text-center">
-                  <div className="text-xs text-foreground/70">Gold 24K</div>
-                  <div className="font-semibold text-sm">₹{rates.gold24k.toFixed(0)}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-xs text-foreground/70">Gold 22K</div>
-                  <div className="font-semibold text-sm">₹{rates.gold22k.toFixed(0)}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-xs text-foreground/70">Gold 18K</div>
-                  <div className="font-semibold text-sm">₹{rates.gold18k.toFixed(0)}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-xs text-foreground/70">Silver/g</div>
-                  <div className="font-semibold text-sm">₹{rates.silverPerGram.toFixed(0)}</div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+            {/* Expanded view (mobile) */}
+            <AnimatePresence>
+              {isExpanded && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="mt-3 pt-3 border-t border-foreground/20 grid grid-cols-2 gap-3 md:hidden"
+                >
+                  <div className="text-center">
+                    <div className="text-xs text-foreground/70">Gold 24K (10g)</div>
+                    <div className="font-semibold text-sm">₹{rates.gold10gm ? rates.gold10gm.toFixed(0) : (rates.gold24k * 10).toFixed(0)}</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xs text-foreground/70">Gold 22K (10g)</div>
+                    <div className="font-semibold text-sm">₹{(rates.gold22k * 10).toFixed(0)}</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xs text-foreground/70">Gold 18K (10g)</div>
+                    <div className="font-semibold text-sm">₹{(rates.gold18k * 10).toFixed(0)}</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xs text-foreground/70">Silver (10g)</div>
+                    <div className="font-semibold text-sm">₹{rates.silver10gm ? rates.silver10gm.toFixed(0) : (rates.silverPerGram * 10).toFixed(0)}</div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
         </div>
       </motion.div>
 
@@ -246,19 +248,19 @@ export default function GoldSilverRatesBanner() {
 
             {/* Detailed Rates */}
             <div className="space-y-2">
-              <h3 className="font-semibold text-sm">Gold Rates (per gram)</h3>
+              <h3 className="font-semibold text-sm">Gold Rates (per 10 grams)</h3>
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div className="flex justify-between p-2 bg-background border border-bordersubtle rounded">
                   <span>24K:</span>
-                  <span className="font-semibold">₹{rates.gold24k.toFixed(2)}</span>
+                  <span className="font-semibold">₹{rates.gold10gm ? rates.gold10gm.toFixed(2) : (rates.gold24k * 10).toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between p-2 bg-background border border-bordersubtle rounded">
                   <span>22K:</span>
-                  <span className="font-semibold">₹{rates.gold22k.toFixed(2)}</span>
+                  <span className="font-semibold">₹{(rates.gold22k * 10).toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between p-2 bg-background border border-bordersubtle rounded col-span-2">
                   <span>18K:</span>
-                  <span className="font-semibold">₹{rates.gold18k.toFixed(2)}</span>
+                  <span className="font-semibold">₹{(rates.gold18k * 10).toFixed(2)}</span>
                 </div>
               </div>
             </div>
@@ -272,8 +274,8 @@ export default function GoldSilverRatesBanner() {
                   <span className="font-semibold">₹{rates.silverPerGram.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between p-2 bg-background border border-bordersubtle rounded">
-                  <span>Per kg:</span>
-                  <span className="font-semibold">₹{rates.silverPerKg.toFixed(0)}</span>
+                  <span>Per 10g:</span>
+                  <span className="font-semibold">₹{rates.silver10gm ? rates.silver10gm.toFixed(0) : (rates.silverPerGram * 10).toFixed(0)}</span>
                 </div>
               </div>
             </div>
@@ -287,13 +289,13 @@ export default function GoldSilverRatesBanner() {
               <div>
                 <span className="font-semibold">Source:</span>{' '}
                 <a
-                  href="https://www.ibja.org"
+                  href="https://bullions.co.in"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"
-                  aria-label="Visit IBJA website"
+                  aria-label="Visit Bullions.co.in website"
                 >
-                  {rates.source} (India Bullion & Jewellers Association)
+                  {rates.source}
                 </a>
               </div>
               {isFallback && (
@@ -312,8 +314,8 @@ export default function GoldSilverRatesBanner() {
           '@context': 'https://schema.org',
           '@type': 'PriceSpecification',
           priceCurrency: 'INR',
-          price: rates.gold24k,
-          description: `Gold 24K rate in ${rates.city}`,
+          price: rates.gold10gm || rates.gold24k * 10,
+          description: `Gold 24K rate (per 10g) in ${rates.city}`,
           validFrom: rates.timestamp,
         })}
       </script>
