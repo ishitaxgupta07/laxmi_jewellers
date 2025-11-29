@@ -29,7 +29,9 @@ export default function GoldSilverRatesBanner() {
 
   useEffect(() => {
     // Initial fetch
-    fetchRates();
+    fetchRates().catch((err) => {
+      console.error('Failed to fetch gold/silver rates:', err);
+    });
 
     // Set up interval for periodic updates
     const isMarketHours = () => {
@@ -47,7 +49,9 @@ export default function GoldSilverRatesBanner() {
     };
 
     const interval = setInterval(() => {
-      fetchRates();
+      fetchRates().catch((err) => {
+        console.error('Failed to fetch gold/silver rates:', err);
+      });
     }, isMarketHours() ? 5 * 60 * 1000 : 30 * 60 * 1000);
 
     return () => clearInterval(interval);
@@ -77,7 +81,7 @@ export default function GoldSilverRatesBanner() {
   if (!rates && loading) {
     return (
       <div
-        className="w-full bg-gradient-to-r from-primary to-primary-foreground text-foreground py-3 px-4"
+        className="w-full bg-gradient-to-r from-primary to-primary-foreground text-foreground py-3 px-4 sticky top-0 z-40 shadow-md"
         role="status"
         aria-live="polite"
         aria-label="Loading gold and silver rates"
@@ -85,6 +89,21 @@ export default function GoldSilverRatesBanner() {
         <div className="max-w-[100rem] mx-auto flex items-center justify-center gap-2">
           <div className="animate-spin h-4 w-4 border-2 border-foreground border-t-transparent rounded-full" />
           <span className="text-sm font-paragraph">Loading rates...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (!rates && error) {
+    return (
+      <div
+        className="w-full bg-gradient-to-r from-primary to-primary-foreground text-foreground py-3 px-4 sticky top-0 z-40 shadow-md"
+        role="status"
+        aria-live="polite"
+        aria-label="Gold and silver rates unavailable"
+      >
+        <div className="max-w-[100rem] mx-auto flex items-center justify-center gap-2">
+          <span className="text-sm font-paragraph">Gold & Silver rates temporarily unavailable</span>
         </div>
       </div>
     );

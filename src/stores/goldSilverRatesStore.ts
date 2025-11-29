@@ -11,6 +11,18 @@ export interface RatesData {
   source: string;
 }
 
+// Demo data for development/testing
+const DEMO_RATES: RatesData = {
+  city: 'Mumbai',
+  gold24k: 7450,
+  gold22k: 6830,
+  gold18k: 5730,
+  silverPerGram: 92.50,
+  silverPerKg: 92500,
+  timestamp: new Date().toISOString(),
+  source: 'IBJA',
+};
+
 interface RatesStore {
   rates: RatesData | null;
   loading: boolean;
@@ -26,10 +38,10 @@ interface RatesStore {
 }
 
 export const useGoldSilverRatesStore = create<RatesStore>((set, get) => ({
-  rates: null,
+  rates: DEMO_RATES,
   loading: false,
   error: null,
-  lastFetchTime: null,
+  lastFetchTime: Date.now(),
   isFallback: false,
 
   setRates: (rates) => set({ rates }),
@@ -51,6 +63,11 @@ export const useGoldSilverRatesStore = create<RatesStore>((set, get) => ({
 
     try {
       const response = await fetch('/_functions/fetch-gold-silver-rates');
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const result = await response.json();
 
       if (result.success && result.data) {
@@ -61,15 +78,17 @@ export const useGoldSilverRatesStore = create<RatesStore>((set, get) => ({
           isFallback: result.fallback || false,
         });
       } else {
-        set({
-          error: 'Failed to fetch rates',
-          loading: false,
-        });
+        throw new Error(result.error || 'Failed to fetch rates');
       }
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      console.error('Gold/Silver rates fetch error:', errorMessage);
+      
+      // Keep showing demo data on error instead of clearing rates
       set({
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: errorMessage,
         loading: false,
+        isFallback: true,
       });
     }
   },
