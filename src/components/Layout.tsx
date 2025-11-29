@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { MiniCart } from '@/wix-verticals/react-pages/react-router/routes/root';
 import { ShoppingCart, Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import GoldSilverRatesBanner from '@/components/GoldSilverRatesBanner';
 
 function Header() {
   const { member, isAuthenticated, isLoading, actions } = useMember();
@@ -195,7 +194,6 @@ function Footer() {
 export default function Layout() {
   return (
     <div className="min-h-screen flex flex-col">
-      <GoldSilverRatesBanner />
       <Header />
       <main className="flex-1">
         <Outlet />
