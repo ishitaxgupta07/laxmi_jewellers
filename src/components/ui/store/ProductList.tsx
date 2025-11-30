@@ -209,7 +209,11 @@ export const ProductTotalsDisplayed = React.forwardRef<
     className={className}
     asChild
   >
-
+    {({ length }) => (
+      <div className={className}>
+        {label.replace('{length}', String(length))}
+      </div>
+    )}
   </ProductListPrimitive.TotalsDisplayed>
 ));
 

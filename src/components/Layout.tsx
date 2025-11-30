@@ -23,9 +23,7 @@ function Header() {
             <Link to="/" className="font-paragraph text-foreground hover:text-buttonbackground transition-colors">
               Home
             </Link>
-            <Link to="/store" className="font-paragraph text-foreground hover:text-buttonbackground transition-colors">
-              Shop
-            </Link>
+
             <Link to="/customization" className="font-paragraph text-foreground hover:text-buttonbackground transition-colors">
               Custom Design
             </Link>
@@ -84,16 +82,7 @@ function Header() {
               >
                 Home
               </Link>
-              <Link 
-                to="/store" 
-                className="font-paragraph text-foreground hover:text-buttonbackground transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Shop
-              </Link>
-              <Link 
-                to="/customization" 
-                className="font-paragraph text-foreground hover:text-buttonbackground transition-colors"
+              <Link to="/customization" className="font-paragraph text-foreground hover:text-buttonbackground transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Custom Design
@@ -145,9 +134,6 @@ function Footer() {
           <div>
             <h4 className="font-heading text-lg mb-4">Quick Links</h4>
             <div className="space-y-2">
-              <Link to="/store" className="block font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                Shop Collection
-              </Link>
               <Link to="/customization" className="block font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                 Custom Design
               </Link>

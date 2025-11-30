@@ -6,10 +6,6 @@ import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
 
 // Import route components and loaders
 import { rootRouteLoader, WixServicesProvider } from '@/wix-verticals/react-pages/react-router/routes/root';
-import { ProductDetailsRoute, productRouteLoader } from '@/wix-verticals/react-pages/react-router/routes/product-details';
-import { StoreCollectionRoute, storeCollectionRouteLoader } from '@/wix-verticals/react-pages/react-router/routes/store-collection';
-import { defaultStoreCollectionRouteRedirectLoader } from '@/wix-verticals/react-pages/react-router/routes/store-redirect';
-import { Cart } from '@/wix-verticals/react-pages/react-router/routes/cart';
 
 // Import page components
 import Layout from '@/components/Layout';
@@ -63,53 +59,6 @@ const router = createBrowserRouter([
           <MemberProtectedRoute>
             <ProfilePage />
           </MemberProtectedRoute>
-        ),
-      },
-      // Store routes
-      {
-        path: "store",
-        element: (
-          <div className="bg-background">
-            <div className="max-w-[100rem] mx-auto px-6 py-8">
-              <h1 className="font-heading text-4xl text-foreground mb-8">Our Jewelry Collection</h1>
-              <StoreCollectionRoute productPageRoute="/products" />
-            </div>
-          </div>
-        ),
-        loader: defaultStoreCollectionRouteRedirectLoader,
-        index: true,
-      },
-      {
-        path: "store/:categorySlug",
-        element: (
-          <div className="bg-background">
-            <div className="max-w-[100rem] mx-auto px-6 py-8">
-              <StoreCollectionRoute productPageRoute="/products" />
-            </div>
-          </div>
-        ),
-        loader: storeCollectionRouteLoader,
-      },
-      {
-        path: "products/:slug",
-        element: (
-          <div className="bg-background">
-            <div className="max-w-[100rem] mx-auto px-6 py-8">
-              <ProductDetailsRoute />
-            </div>
-          </div>
-        ),
-        loader: productRouteLoader,
-      },
-      {
-        path: "cart",
-        element: (
-          <div className="bg-background">
-            <div className="max-w-[100rem] mx-auto px-6 py-8">
-              <h1 className="font-heading text-4xl text-foreground mb-8">Shopping Cart</h1>
-              <Cart />
-            </div>
-          </div>
         ),
       },
       {

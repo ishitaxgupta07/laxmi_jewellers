@@ -183,7 +183,9 @@ export const ProductListWrapper: React.FC<ProductListProps> = ({
                             route={`${productPageRoute}/${slug}`}
                             className="w-full"
                           >
-
+                            <Button variant="outline" className="w-full">
+                              View Details
+                            </Button>
                           </Navigation>
                         )}
                       </ProductSlug>
