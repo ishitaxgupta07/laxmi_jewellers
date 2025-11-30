@@ -215,7 +215,7 @@ const emptyCartState = () => {
       <p className="text-content-light text-lg mb-8">
         Start shopping to add items to your cart
       </p>
-      <Navigation route="/store">
+      <Navigation route="/">
         <Button size="lg" className="p-6 text-md">
           Continue Shopping
           <svg

@@ -203,18 +203,9 @@ export const ProductTotalsDisplayed = React.forwardRef<
     label?: string;
   }
 >(({ className, label = '{length} products loaded', ...props }, ref) => (
-  <ProductListPrimitive.TotalsDisplayed
-    ref={ref}
-    {...props}
-    className={className}
-    asChild
-  >
-    {({ length }) => (
-      <div className={className}>
-        {label.replace('{length}', String(length))}
-      </div>
-    )}
-  </ProductListPrimitive.TotalsDisplayed>
+  <div ref={ref} className={className} {...props}>
+    <ProductListPrimitive.TotalsDisplayed label={label} />
+  </div>
 ));
 
 ProductTotalsDisplayed.displayName = 'ProductTotalsDisplayed';

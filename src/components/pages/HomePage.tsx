@@ -69,10 +69,10 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="bg-buttonbackground text-buttonforeground hover:bg-buttonbackground/90 border border-primary-foreground">
-                <Link to="/store">Explore Collection</Link>
+                <Link to="/customization">Custom Design</Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                <Link to="/customization">Custom Design</Link>
+                <Link to="/contact">Contact Us</Link>
               </Button>
             </div>
           </div>
@@ -202,7 +202,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Link to="/store" className="group">
+            <div className="group">
               <div className="bg-secondary rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
                 <div className="w-16 h-16 rounded-full mx-auto mb-6 overflow-hidden">
                   <Image 
@@ -216,9 +216,9 @@ export default function HomePage() {
                 <h3 className="font-heading text-2xl text-secondary-foreground mb-3">{"Gold Jewellery"}</h3>
                 <p className="font-paragraph text-secondary-foreground/80">{"Timeless pieces in yellow and rose gold"}</p>
               </div>
-            </Link>
+            </div>
 
-            <Link to="/store" className="group">
+            <div className="group">
               <div className="bg-secondary rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
                 <div className="w-16 h-16 rounded-full mx-auto mb-6 overflow-hidden">
                   <Image 
@@ -232,9 +232,9 @@ export default function HomePage() {
                 <h3 className="font-heading text-2xl text-secondary-foreground mb-3">{"Diamond Jewellery"}</h3>
                 <p className="font-paragraph text-secondary-foreground/80">Brilliant cuts and exceptional clarity</p>
               </div>
-            </Link>
+            </div>
 
-            <Link to="/store" className="group">
+            <div className="group">
               <div className="bg-secondary rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
                 <div className="w-16 h-16 rounded-full mx-auto mb-6 overflow-hidden">
                   <Image 
@@ -248,9 +248,9 @@ export default function HomePage() {
                 <h3 className="font-heading text-2xl text-secondary-foreground mb-3">{"Platinum Jewellery"}</h3>
                 <p className="font-paragraph text-secondary-foreground/80">Pure elegance in the finest metal</p>
               </div>
-            </Link>
+            </div>
 
-            <Link to="/store" className="group">
+            <div className="group">
               <div className="bg-secondary rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
                 <div className="w-16 h-16 bg-softaccent rounded-full mx-auto mb-6 flex items-center justify-center overflow-hidden">
                   <Image
@@ -264,7 +264,7 @@ export default function HomePage() {
                 <h3 className="font-heading text-2xl text-secondary-foreground mb-3">{"Silver Jewellery"}</h3>
                 <p className="font-paragraph text-secondary-foreground/80">Contemporary designs in sterling silver</p>
               </div>
-            </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -310,7 +310,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-buttonbackground text-buttonforeground hover:bg-buttonbackground/90">
-              <Link to="/store">Shop Now</Link>
+              <Link to="/customization">Custom Design</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-secondary-foreground text-secondary-foreground hover:bg-secondary-foreground hover:text-secondary">
               <Link to="/contact">Contact Us</Link>
