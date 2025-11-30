@@ -23,7 +23,9 @@ function Header() {
             <Link to="/" className="font-paragraph text-foreground hover:text-buttonbackground transition-colors">
               Home
             </Link>
-
+            <Link to="/store" className="font-paragraph text-foreground hover:text-buttonbackground transition-colors">
+              Shop
+            </Link>
             <Link to="/customization" className="font-paragraph text-foreground hover:text-buttonbackground transition-colors">
               Custom Design
             </Link>
@@ -81,6 +83,13 @@ function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Home
+              </Link>
+              <Link 
+                to="/store" 
+                className="font-paragraph text-foreground hover:text-buttonbackground transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Shop
               </Link>
               <Link to="/customization" className="font-paragraph text-foreground hover:text-buttonbackground transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}

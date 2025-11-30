@@ -15,6 +15,7 @@ import CustomizationPage from '@/components/pages/CustomizationPage';
 import ResourcesPage from '@/components/pages/ResourcesPage';
 import ContactPage from '@/components/pages/ContactPage';
 import ProfilePage from '@/components/pages/ProfilePage';
+import StorePage from '@/components/pages/StorePage';
 
 // Main layout component that includes the scroll to top component and the layout component
 function MainLayout() {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <ContactPage />,
+      },
+      {
+        path: "store",
+        element: <StorePage />,
       },
       {
         path: "profile",
