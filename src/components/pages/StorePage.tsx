@@ -62,7 +62,7 @@ export default function StorePage() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="font-heading text-5xl md:text-7xl lg:text-8xl text-primary-foreground mb-6 leading-tight"
             >
-              Our Store is Launching Soon
+              Our Online Store is Launching Soon
             </motion.h1>
 
             {/* Subheading */}

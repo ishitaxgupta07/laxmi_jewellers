@@ -1,4 +1,8 @@
 {
   "/customization/page": "app/customization/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/resources/page": "app/resources/page.js",
+  "/store/page": "app/store/page.js",
+  "/about/page": "app/about/page.js",
   "/page": "app/page.js"
 }
