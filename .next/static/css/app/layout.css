@@ -2904,6 +2904,10 @@ div[style*="position: fixed"][style*="bottom"][style*="right"] div:contains("Pow
     color: rgb(240 237 230 / var(--tw-text-opacity, 1));
   }
 
+  .hover\:text-buttonbackground\/80:hover{
+    color: rgb(59 74 58 / 0.8);
+  }
+
   .hover\:underline:hover{
     text-decoration-line: underline;
   }

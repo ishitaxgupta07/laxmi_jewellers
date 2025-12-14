@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MapPin, Phone, Mail, Clock, CheckCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, CheckCircle, ExternalLink } from 'lucide-react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -105,7 +105,18 @@ export default function ContactPage() {
                 <div className="flex items-start space-x-4">
                   <MapPin className="w-6 h-6 text-buttonbackground mt-1" />
                   <div>
-                    <h3 className="font-heading text-xl text-foreground mb-2">Visit Our Showroom</h3>
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className="font-heading text-xl text-foreground">Visit Our Showroom</h3>
+                      <a 
+                        href="https://maps.app.goo.gl/WW1ALHJDDbuEV7j17" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-buttonbackground hover:text-buttonbackground/80 transition-colors"
+                        aria-label="Open location in Google Maps"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </a>
+                    </div>
                     <p className="font-paragraph text-foreground/80">
                       Ramnagri More, Ashiana Digha Road<br />
                       Patna - 800025
