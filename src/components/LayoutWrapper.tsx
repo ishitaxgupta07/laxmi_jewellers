@@ -112,13 +112,13 @@ function Header() {
               >
                 About
               </Link>
-              <Link 
+              {/* <Link 
                 href="/resources" 
                 className="font-navbar text-foreground hover:text-buttonbackground transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Resources
-              </Link>
+              </Link> */}
               <Link 
                 href="/contact" 
                 className="font-navbar text-foreground hover:text-buttonbackground transition-colors"
