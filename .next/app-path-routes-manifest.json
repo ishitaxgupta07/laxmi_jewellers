@@ -1,0 +1,11 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/api/send-customization/route": "/api/send-customization",
+  "/api/send-contact/route": "/api/send-contact",
+  "/resources/page": "/resources",
+  "/page": "/",
+  "/store/page": "/store",
+  "/contact/page": "/contact",
+  "/about/page": "/about",
+  "/customization/page": "/customization"
+}
