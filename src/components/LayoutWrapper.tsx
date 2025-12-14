@@ -30,9 +30,9 @@ function Header() {
             <Link href="/customization" className="font-navbar text-foreground hover:text-buttonbackground transition-colors">
               Custom Design
             </Link>
-            <Link href="/resources" className="font-navbar text-foreground hover:text-buttonbackground transition-colors">
+            {/* <Link href="/resources" className="font-navbar text-foreground hover:text-buttonbackground transition-colors">
               Resources
-            </Link>
+            </Link> */}
             <Link href="/about" className="font-navbar text-foreground hover:text-buttonbackground transition-colors">
               About
             </Link>
