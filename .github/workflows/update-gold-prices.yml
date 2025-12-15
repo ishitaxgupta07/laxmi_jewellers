@@ -2,8 +2,8 @@ name: Update Gold & Silver Prices
 
 on:
   schedule:
-    # Run every 5 minutes for testing (change to '0 0 * * *' for daily at midnight)
-    - cron: '*/5 * * * *'
+    # Run every 30 minutes for testing (change to '0 0 * * *' for daily at midnight)
+    - cron: '*/30 * * * *'
   workflow_dispatch: # Allow manual trigger
 
 jobs:
