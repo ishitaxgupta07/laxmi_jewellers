@@ -3,6 +3,7 @@ import { Playfair_Display, Montserrat, Inter } from 'next/font/google'
 import './globals.css'
 import { MemberProvider } from '@/lib/mock-auth'
 import LayoutWrapper from '@/components/LayoutWrapper'
+import { Analytics } from '@vercel/analytics/next'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -43,6 +44,7 @@ export default function RootLayout({
             {children}
           </LayoutWrapper>
         </MemberProvider>
+        <Analytics />
       </body>
     </html>
   )
