@@ -1234,6 +1234,9 @@ video {
 .mt-8{
   margin-top: 2rem;
 }
+.ml-2{
+  margin-left: 0.5rem;
+}
 .line-clamp-2{
   overflow: hidden;
   display: -webkit-box;
@@ -1948,6 +1951,9 @@ video {
 .border-transparent{
   border-color: transparent;
 }
+.border-primary-foreground\/10{
+  border-color: rgb(240 237 230 / 0.1);
+}
 .border-l-transparent{
   border-left-color: transparent;
 }
@@ -2270,6 +2276,10 @@ video {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+.py-2\.5{
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
 .pb-10{
   padding-bottom: 2.5rem;
 }
@@ -2560,6 +2570,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(133 77 14 / var(--tw-text-opacity, 1));
 }
+.text-yellow-300{
+  --tw-text-opacity: 1;
+  color: rgb(253 224 71 / var(--tw-text-opacity, 1));
+}
 .underline{
   text-decoration-line: underline;
 }
@@ -2589,6 +2603,9 @@ video {
 }
 .opacity-90{
   opacity: 0.9;
+}
+.opacity-80{
+  opacity: 0.8;
 }
 .shadow{
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
@@ -3316,6 +3333,10 @@ div[style*="position: fixed"][style*="bottom"][style*="right"] div:contains("Pow
     display: inline;
   }
 
+  .sm\:flex{
+    display: flex;
+  }
+
   .sm\:h-12{
     height: 3rem;
   }
@@ -3453,8 +3474,16 @@ div[style*="position: fixed"][style*="bottom"][style*="right"] div:contains("Pow
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .md\:justify-center{
+    justify-content: center;
+  }
+
   .md\:gap-4{
     gap: 1rem;
+  }
+
+  .md\:gap-8{
+    gap: 2rem;
   }
 
   .md\:text-2xl{

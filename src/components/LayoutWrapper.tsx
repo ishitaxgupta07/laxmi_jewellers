@@ -5,6 +5,7 @@ import { useMember } from '@/lib/mock-auth'
 import { Button } from '@/components/ui/button'
 import { ShoppingCart, Menu, X } from 'lucide-react'
 import { useState } from 'react'
+import GoldSilverRatesBanner from './GoldSilverRatesBanner'
 
 function Header() {
   const { member, isAuthenticated, isLoading, actions } = useMember()
@@ -202,6 +203,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
+      <GoldSilverRatesBanner />
       <main>{children}</main>
       <Footer />
     </>

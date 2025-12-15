@@ -1,324 +1,95 @@
-import React, { useEffect, useState } from 'react';
-import { useGoldSilverRatesStore } from '@/stores/goldSilverRatesStore';
-import { ChevronDown, Info, TrendingUp } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+'use client'
+
+import { useState, useEffect } from 'react'
+import { TrendingUp, Clock } from 'lucide-react'
 
 interface RatesData {
-  city: string;
-  gold24k: number;
-  gold22k: number;
-  gold18k: number;
-  silverPerGram: number;
-  silverPerKg: number;
-  timestamp: string;
-  source: string;
-  gold10gm?: number;
-  silver10gm?: number;
+  gold22k: number
+  gold24k: number
+  silver: number
+  lastUpdated: string
+  source: string
 }
 
 export default function GoldSilverRatesBanner() {
-  const { rates, loading, error, isFallback, fetchRates } = useGoldSilverRatesStore();
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [showInfoModal, setShowInfoModal] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [rates, setRates] = useState<RatesData | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Initial fetch
-    fetchRates().catch((err) => {
-      console.error('Failed to fetch gold/silver rates:', err);
-    });
-
-    // Set up interval for periodic updates
-    const isMarketHours = () => {
-      const now = new Date();
-      const istTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
-      const hours = istTime.getHours();
-      const minutes = istTime.getMinutes();
-      const dayOfWeek = istTime.getDay();
-
-      if (dayOfWeek === 0 || dayOfWeek === 6) return false;
-      if (hours < 9 || (hours === 9 && minutes < 30)) return false;
-      if (hours >= 17) return false;
-
-      return true;
-    };
-
-    const interval = setInterval(() => {
-      fetchRates().catch((err) => {
-        console.error('Failed to fetch gold/silver rates:', err);
-      });
-    }, isMarketHours() ? 5 * 60 * 1000 : 30 * 60 * 1000);
-
-    return () => clearInterval(interval);
-  }, [fetchRates]);
+    fetch('/data/gold-prices.json')
+      .then(res => res.json())
+      .then((data: RatesData) => {
+        setRates(data)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.error('Failed to load gold/silver rates:', err)
+        setLoading(false)
+      })
+  }, [])
 
   const formatTime = (timestamp: string) => {
-    const date = new Date(timestamp);
-    return date.toLocaleString('en-IN', {
-      timeZone: 'Asia/Kolkata',
+    const date = new Date(timestamp)
+    return date.toLocaleTimeString('en-IN', {
       hour: '2-digit',
       minute: '2-digit',
-      second: '2-digit',
       hour12: true,
-    });
-  };
-
-  const formatDate = (timestamp: string) => {
-    const date = new Date(timestamp);
-    return date.toLocaleString('en-IN', {
-      timeZone: 'Asia/Kolkata',
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-    });
-  };
-
-  if (!rates && loading) {
-    return (
-      <div
-        className="w-full bg-gradient-to-r from-primary to-primary-foreground text-foreground py-3 px-4 sticky top-0 z-40 shadow-md"
-        role="status"
-        aria-live="polite"
-        aria-label="Loading gold and silver rates"
-      >
-        <div className="max-w-[100rem] mx-auto flex items-center justify-center gap-2">
-          <div className="animate-spin h-4 w-4 border-2 border-foreground border-t-transparent rounded-full" />
-          <span className="text-sm font-paragraph">Loading rates...</span>
-        </div>
-      </div>
-    );
+    })
   }
 
-  if (!rates && error) {
+  if (loading) {
     return (
-      <div
-        className="w-full bg-gradient-to-r from-primary to-primary-foreground text-foreground py-3 px-4 sticky top-0 z-40 shadow-md"
-        role="status"
-        aria-live="polite"
-        aria-label="Gold and silver rates unavailable"
-      >
-        <div className="max-w-[100rem] mx-auto flex items-center justify-center gap-2">
-          <span className="text-sm font-paragraph">Gold & Silver rates temporarily unavailable</span>
+      <div className="w-full bg-primary text-primary-foreground py-2.5 px-4 border-b border-primary-foreground/10">
+        <div className="max-w-[100rem] mx-auto flex items-center justify-center">
+          <div className="animate-spin h-4 w-4 border-2 border-primary-foreground border-t-transparent rounded-full" />
+          <span className="ml-2 text-sm">Loading rates...</span>
         </div>
       </div>
-    );
+    )
   }
 
   if (!rates) {
-    return null;
+    return null
   }
 
   return (
-    <>
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="w-full bg-gradient-to-r from-primary to-primary-foreground text-foreground sticky top-0 z-40 shadow-md"
-        role="region"
-        aria-label="Gold and silver rates banner"
-      >
-        <div className="max-w-[100rem] mx-auto px-4 py-3">
-          {/* Compact view */}
-          <div className="flex items-center justify-between gap-2 md:gap-4">
-            {/* Left: City and timestamp */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xs md:text-sm font-paragraph font-semibold">
-                  {rates.city}
-                </span>
-                <span className="text-xs text-foreground/70 hidden sm:inline">
-                  {formatDate(rates.timestamp)} {formatTime(rates.timestamp)} IST
-                </span>
-                {isFallback && (
-                  <span
-                    className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded"
-                    aria-label="Using cached rates"
-                  >
-                    Cached
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Center: Key rates (compact) */}
-            <div className="hidden md:flex items-center gap-4 text-sm">
-              <div className="text-center">
-                <div className="text-xs text-foreground/70">Gold 24K (10g)</div>
-                <div className="font-semibold">₹{rates.gold10gm ? rates.gold10gm.toFixed(0) : (rates.gold24k * 10).toFixed(0)}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xs text-foreground/70">Silver (10g)</div>
-                <div className="font-semibold">₹{rates.silver10gm ? rates.silver10gm.toFixed(0) : (rates.silverPerGram * 10).toFixed(0)}</div>
-              </div>
-            </div>
-
-            {/* Right: Controls */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setShowInfoModal(true)}
-                className="p-1.5 hover:bg-foreground/10 rounded transition-colors"
-                aria-label="Show rate information"
-                title="Information about rates"
-              >
-                <Info size={18} />
-              </button>
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="p-1.5 hover:bg-foreground/10 rounded transition-colors md:hidden"
-                aria-label={isExpanded ? 'Collapse rates' : 'Expand rates'}
-                aria-expanded={isExpanded}
-              >
-                <ChevronDown
-                  size={18}
-                  className={`transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-                />
-              </button>
-              <button
-                onClick={() => setIsCollapsed(!isCollapsed)}
-                className="p-1.5 hover:bg-foreground/10 rounded transition-colors"
-                aria-label={isCollapsed ? 'Expand banner' : 'Collapse banner'}
-                title={isCollapsed ? 'Show banner' : 'Hide banner'}
-              >
-                <TrendingUp size={18} />
-              </button>
+    <div className="w-full bg-primary text-primary-foreground py-2.5 px-4 border-b border-primary-foreground/10">
+      <div className="max-w-[100rem] mx-auto">
+        <div className="flex items-center justify-between md:justify-center gap-4 md:gap-8 flex-wrap">
+          {/* Gold 22K */}
+          <div className="flex items-center gap-2">
+            <TrendingUp className="w-4 h-4 text-yellow-300" />
+            <div>
+              <div className="text-xs opacity-80">Gold 22K</div>
+              <div className="font-navbar font-semibold">₹{rates.gold22k?.toLocaleString('en-IN')}/10g</div>
             </div>
           </div>
 
-            {/* Expanded view (mobile) */}
-            <AnimatePresence>
-              {isExpanded && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="mt-3 pt-3 border-t border-foreground/20 grid grid-cols-2 gap-3 md:hidden"
-                >
-                  <div className="text-center">
-                    <div className="text-xs text-foreground/70">Gold 24K (10g)</div>
-                    <div className="font-semibold text-sm">₹{rates.gold10gm ? rates.gold10gm.toFixed(0) : (rates.gold24k * 10).toFixed(0)}</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xs text-foreground/70">Gold 22K (10g)</div>
-                    <div className="font-semibold text-sm">₹{(rates.gold22k * 10).toFixed(0)}</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xs text-foreground/70">Gold 18K (10g)</div>
-                    <div className="font-semibold text-sm">₹{(rates.gold18k * 10).toFixed(0)}</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xs text-foreground/70">Silver (10g)</div>
-                    <div className="font-semibold text-sm">₹{rates.silver10gm ? rates.silver10gm.toFixed(0) : (rates.silverPerGram * 10).toFixed(0)}</div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+          {/* Gold 24K */}
+          <div className="flex items-center gap-2">
+            <TrendingUp className="w-4 h-4 text-yellow-400" />
+            <div>
+              <div className="text-xs opacity-80">Gold 24K</div>
+              <div className="font-navbar font-semibold">₹{rates.gold24k?.toLocaleString('en-IN')}/10g</div>
+            </div>
+          </div>
+
+          {/* Silver */}
+          <div className="flex items-center gap-2">
+            <TrendingUp className="w-4 h-4 text-gray-300" />
+            <div>
+              <div className="text-xs opacity-80">Silver 999</div>
+              <div className="font-navbar font-semibold">₹{rates.silver?.toLocaleString('en-IN')}/10g</div>
+            </div>
+          </div>
+
+          {/* Updated time */}
+          <div className="hidden sm:flex items-center gap-1.5 text-xs opacity-70">
+            <Clock className="w-3.5 h-3.5" />
+            <span>Updated {formatTime(rates.lastUpdated)}</span>
+          </div>
         </div>
-      </motion.div>
-
-      {/* Info Modal */}
-      <Dialog open={showInfoModal} onOpenChange={setShowInfoModal}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="font-heading text-xl">Gold & Silver Rates</DialogTitle>
-            <DialogDescription className="font-paragraph">
-              Current rates for {rates.city}
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="space-y-4">
-            {/* BIS Hallmark Badge */}
-            <div className="flex items-center gap-3 p-3 bg-primary/10 rounded-lg">
-              <div className="text-2xl">✓</div>
-              <div>
-                <div className="font-semibold text-sm">BIS Hallmark Certified</div>
-                <div className="text-xs text-foreground/70">
-                  All rates comply with Bureau of Indian Standards
-                </div>
-              </div>
-            </div>
-
-            {/* Detailed Rates */}
-            <div className="space-y-2">
-              <h3 className="font-semibold text-sm">Gold Rates (per 10 grams)</h3>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                <div className="flex justify-between p-2 bg-background border border-bordersubtle rounded">
-                  <span>24K:</span>
-                  <span className="font-semibold">₹{rates.gold10gm ? rates.gold10gm.toFixed(2) : (rates.gold24k * 10).toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between p-2 bg-background border border-bordersubtle rounded">
-                  <span>22K:</span>
-                  <span className="font-semibold">₹{(rates.gold22k * 10).toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between p-2 bg-background border border-bordersubtle rounded col-span-2">
-                  <span>18K:</span>
-                  <span className="font-semibold">₹{(rates.gold18k * 10).toFixed(2)}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Silver Rates */}
-            <div className="space-y-2">
-              <h3 className="font-semibold text-sm">Silver Rates</h3>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                <div className="flex justify-between p-2 bg-background border border-bordersubtle rounded">
-                  <span>Per gram:</span>
-                  <span className="font-semibold">₹{rates.silverPerGram.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between p-2 bg-background border border-bordersubtle rounded">
-                  <span>Per 10g:</span>
-                  <span className="font-semibold">₹{rates.silver10gm ? rates.silver10gm.toFixed(0) : (rates.silverPerGram * 10).toFixed(0)}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Timestamp and Source */}
-            <div className="text-xs text-foreground/70 space-y-1 pt-2 border-t border-bordersubtle">
-              <div>
-                <span className="font-semibold">Last Updated:</span> {formatDate(rates.timestamp)}{' '}
-                {formatTime(rates.timestamp)} IST
-              </div>
-              <div>
-                <span className="font-semibold">Source:</span>{' '}
-                <a
-                  href="https://bullions.co.in"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                  aria-label="Visit Bullions.co.in website"
-                >
-                  {rates.source}
-                </a>
-              </div>
-              {isFallback && (
-                <div className="text-yellow-700">
-                  ⚠️ Showing cached rates. Live rates unavailable.
-                </div>
-              )}
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Structured Data for SEO */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'PriceSpecification',
-          priceCurrency: 'INR',
-          price: rates.gold10gm || rates.gold24k * 10,
-          description: `Gold 24K rate (per 10g) in ${rates.city}`,
-          validFrom: rates.timestamp,
-        })}
-      </script>
-    </>
-  );
+      </div>
+    </div>
+  )
 }
