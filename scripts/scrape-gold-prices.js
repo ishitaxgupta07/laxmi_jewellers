@@ -87,11 +87,17 @@ async function scrapeGoldPrices() {
         
         if (rowText.includes('silver 999') && !prices.silver) {
           const fullText = $(row).text().replace(/\s+/g, '').trim();
-          // Extract first occurrence of price like 197
-          const match = fullText.match(/(\d{3})1,\d{3}/); // Looks for pattern like "1971,975"
+          
+          // Extract silver price - look for price after "Rs₹" symbol
+          // Pattern: 208 from "Silver999Fine(Rs₹)2082,079..."
+          const match = fullText.match(/Rs₹\)(\d{3})/);
           if (match) {
-            prices.silver = match[1];
-            console.log('✓ Found Silver 999: ₹' + prices.silver + ' per gram');
+            const price = parseInt(match[1]);
+            // Validate silver price range (typically 50-500 per gram)
+            if (price >= 50 && price <= 500) {
+              prices.silver = match[1];
+              console.log('✓ Found Silver 999: ₹' + prices.silver + ' per gram');
+            }
           }
         }
       });
